@@ -20,7 +20,6 @@ export class EncounterDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private encounterService: EncounterService,
-    private monsterService: MonsterService,
   ) { }
 
   ngOnInit() {
@@ -35,14 +34,7 @@ export class EncounterDetailComponent implements OnInit {
       })
     );
     this.encounter$.subscribe(encounter => {
-        const monsterClones = [];
-        encounter.monsters.forEach(monster => {
-            const clone = Object.assign({}, monster);
-            for (let i = 0; i < monster.Amount; i++) {
-              monsterClones.push(clone);
-            }
-          });
-        this.monsters = monsterClones;
+        this.monsters = encounter.monsters;
       });
   }
 

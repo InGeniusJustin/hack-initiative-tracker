@@ -33,8 +33,14 @@ export class MonsterEncounterDialogComponent implements OnInit {
     const encounter = this.encounters.find(en => en.name.toLowerCase() === encounterName.toLowerCase());
     if (encounter) {
       const monsterClone = Object.assign({}, this.data.monster) as IMonster;
-      monsterClone.Amount = parseInt(this.numberControl.value, 10);
-      encounter.monsters.push(monsterClone);
+      const monAmount = parseInt(this.numberControl.value, 10);
+      const monIndex = encounter.monsters.findIndex(mon => mon.Name.toLowerCase() === monsterClone.Name.toLowerCase());
+      if (monIndex !== undefined && monIndex !== null && monIndex >= 0) {
+        encounter.monsters[monIndex].Amount += monAmount;
+      } else {
+        monsterClone.Amount = monAmount;
+        encounter.monsters.push(monsterClone);
+      }
       this.encounterService.UpdateEncounter(encounter);
       this.encounters = this.encounterService.Encounters;
     }

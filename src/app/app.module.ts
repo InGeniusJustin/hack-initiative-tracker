@@ -34,6 +34,8 @@ import { CrPipe } from './cr.pipe';
 import { EncounterDetailSmallComponent } from './encounters/encounter-detail-small/encounter-detail-small.component';
 import { EncounterDialogComponent } from './encounters/encounter-dialog/encounter-dialog.component';
 import { MonsterEncounterDialogComponent } from './monster/monster-encounter-dialog/monster-encounter-dialog.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,7 @@ import { MonsterEncounterDialogComponent } from './monster/monster-encounter-dia
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent],
