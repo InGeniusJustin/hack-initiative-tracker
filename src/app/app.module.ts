@@ -36,6 +36,7 @@ import { EncounterDialogComponent } from './encounters/encounter-dialog/encounte
 import { MonsterEncounterDialogComponent } from './monster/monster-encounter-dialog/monster-encounter-dialog.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { EncounterRunnerComponent } from './encounters/encounter-runner/encounter-runner.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { environment } from '../environments/environment';
     EncounterDetailSmallComponent,
     EncounterDialogComponent,
     MonsterEncounterDialogComponent,
+    EncounterRunnerComponent,
   ],
   imports: [
     BrowserModule,

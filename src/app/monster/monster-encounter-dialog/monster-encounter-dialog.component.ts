@@ -13,9 +13,9 @@ import { Observable } from 'rxjs';
 })
 export class MonsterEncounterDialogComponent implements OnInit {
 
-  public encounters$: Observable<IEncounter[]>;
   public encounterControl: FormControl;
   public numberControl: FormControl;
+  public encounters: IEncounter[];
 
   constructor(
     private encounterService: EncounterService,
@@ -24,16 +24,17 @@ export class MonsterEncounterDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.encounters$ = this.encounterService.Encounters$;
+    this.encounterService.Encounters$.subscribe(encounters => {
+      this.encounters = encounters;
+    });
     this.encounterControl = new FormControl(undefined, []);
     this.numberControl = new FormControl(1, Validators.pattern(/\d*/));
   }
 
   public save() {
     const encounterName = this.encounterControl.value as string;
-    this.encounters$.subscribe(encounters => {
-      const encounter = encounters.find(en => en.name.toLowerCase() === encounterName.toLowerCase());
-      if (encounter) {
+    const encounter = this.encounters.find(en => en.name.toLowerCase() === encounterName.toLowerCase());
+    if (encounter) {
         const monsterClone = Object.assign({}, this.data.monster) as IMonster;
         const monAmount = parseInt(this.numberControl.value, 10);
         const monIndex = encounter.monsters.findIndex(mon => mon.Name.toLowerCase() === monsterClone.Name.toLowerCase());
@@ -45,8 +46,7 @@ export class MonsterEncounterDialogComponent implements OnInit {
         }
         this.encounterService.UpdateEncounter(encounter);
       }
-      this.dialogRef.close();
-      });
+    this.dialogRef.close();
   }
 
   public close() {

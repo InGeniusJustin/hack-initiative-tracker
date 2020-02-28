@@ -19,22 +19,19 @@ export class EncounterDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private encounterService: EncounterService,
+    private service: EncounterService,
   ) { }
 
   ngOnInit() {
     this.encounter$ = this.route.paramMap
     .pipe(
-      switchMap((params: ParamMap) => {
-        const name = params.get('name');
-        if (name) {
-          return this.encounterService.Encounters$.pipe(
-            map(encounters => {
-              encounters.find(encounter => encounter.name.toLowerCase() === name.replace(/-/g, ' '));
-            })
-          );
-        }
-        return of(undefined);
+      map((params: ParamMap) => params.get('name')),
+      switchMap(name => {
+        return this.service.Encounters$.pipe(
+          map(encounters => {
+            return encounters.find(enc => enc.name.toLowerCase() === name.replace(/-/g, ' '));
+          })
+        );
       })
     );
     this.encounter$.subscribe(encounter => {
