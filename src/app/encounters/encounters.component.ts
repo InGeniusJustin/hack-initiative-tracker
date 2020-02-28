@@ -4,6 +4,8 @@ import { IEncounter } from '../store/encounter.store';
 import { FormControl } from '@angular/forms';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { EncounterDialogComponent } from './encounter-dialog/encounter-dialog.component';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-encounters',
@@ -21,26 +23,23 @@ export class EncountersComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.encounters = this.service.Encounters;
+    this.service.Encounters$.subscribe(encounters => this.encounters = encounters);
     this.searchControl.valueChanges
     .subscribe(val => {
-          this.encounters = this.service.Encounters.filter(encounter => encounter.name.toLowerCase().includes(val.toLowerCase()));
+            this.encounters.filter(encounter => encounter.name.toLowerCase().includes(val.toLowerCase()));
       });
   }
 
   public NewEncounter(name: string) {
     this.service.CreateEncounter(name, []);
-    this.encounters = this.service.Encounters;
   }
 
   public UpdateEncounter(encounter: IEncounter) {
     this.service.UpdateEncounter(encounter);
-    this.encounters = this.service.Encounters;
   }
 
   public DeleteEncounter(encounter: IEncounter) {
     this.service.DeleteEncounter(encounter);
-    this.encounters = this.service.Encounters;
   }
 
   public deleteAction = (en) => this.DeleteEncounter(en);
@@ -54,7 +53,7 @@ export class EncountersComponent implements OnInit {
     const dialogRef = this.dialog.open(EncounterDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(data => {
-      if (data.name && data.name.length > 0) {
+      if (data && data.name && data.name.length > 0) {
         this.NewEncounter(data.name);
       }
     });

@@ -9,8 +9,8 @@ export class EncounterService {
 
   constructor(private store: EncounterStore) { }
 
-  public get Encounters() {
-    return this.store.Encounters;
+  public get Encounters$() {
+    return this.store.Encounters$;
   }
 
   public CreateEncounter(name: string, monsters: IMonster[]) {

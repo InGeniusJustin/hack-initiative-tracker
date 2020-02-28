@@ -48,7 +48,9 @@ export class MonsterDetailSmallComponent implements OnInit {
       if (index !== undefined && index !== null && index >= 0) {
         this.encounter.monsters.splice(index, 1);
         this.encounterService.UpdateEncounter(this.encounter);
-        this.encounter = this.encounterService.Encounters.find(en => en.name.toLowerCase() === this.encounter.name.toLowerCase());
+        this.encounterService.Encounters$.subscribe(encounters => {
+          encounters.find(en => en.name.toLowerCase() === this.encounter.name.toLowerCase());
+        });
       }
     }
   }

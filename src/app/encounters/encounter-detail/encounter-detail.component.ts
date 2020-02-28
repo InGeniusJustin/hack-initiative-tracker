@@ -4,8 +4,8 @@ import { EncounterService } from 'src/app/services/encounter.service';
 import { MonsterService } from 'src/app/services/monster.service';
 import { IEncounter } from 'src/app/store/encounter.store';
 import { IMonster } from 'src/app/store/monster-defaults';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-encounter-detail',
@@ -25,12 +25,16 @@ export class EncounterDetailComponent implements OnInit {
   ngOnInit() {
     this.encounter$ = this.route.paramMap
     .pipe(
-      map((params: ParamMap) => {
+      switchMap((params: ParamMap) => {
         const name = params.get('name');
         if (name) {
-          return this.encounterService.Encounters.find(encounter => encounter.name.toLowerCase() === name.replace(/-/g, ' '));
+          return this.encounterService.Encounters$.pipe(
+            map(encounters => {
+              encounters.find(encounter => encounter.name.toLowerCase() === name.replace(/-/g, ' '));
+            })
+          );
         }
-        return undefined;
+        return of(undefined);
       })
     );
     this.encounter$.subscribe(encounter => {
