@@ -39,4 +39,8 @@ export class EncounterDetailComponent implements OnInit {
       });
   }
 
+  public routableEncounter(encounter: IEncounter) {
+    return encounter.name.toLowerCase().replace(/ /g, '-');
+  }
+
 }

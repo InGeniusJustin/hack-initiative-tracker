@@ -1,1 +1,15 @@
-<p>encounter-runner works!</p>
+<div *ngIf="encounter$ | async as encounter">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{encounter.name}}</mat-card-title>
+        </mat-card-header>
+    </mat-card>
+    <div cdkDropList  (cdkDropListDropped)="drop($event)">
+        <app-encounter-monster
+            *ngFor="let monster of monsters" 
+            [isMonster]="monster.isMonster" 
+            [monster]="monster"
+            [encounter]="encounter"
+            cdkDrag></app-encounter-monster>
+    </div>
+</div>

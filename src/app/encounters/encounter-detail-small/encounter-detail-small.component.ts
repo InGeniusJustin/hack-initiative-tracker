@@ -25,7 +25,9 @@ export class EncounterDetailSmallComponent implements OnInit {
   }
 
   public routableEncounter(encounter: IEncounter) {
-    return encounter.name.toLowerCase().replace(/ /g, '-');
+    if (encounter) {
+      return encounter.name.toLowerCase().replace(/ /g, '-');
+    }
   }
 
 }

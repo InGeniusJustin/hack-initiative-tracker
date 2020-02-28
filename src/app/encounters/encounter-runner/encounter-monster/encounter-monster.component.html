@@ -1,0 +1,11 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{monster.Name}}</mat-card-title>
+        <button *ngIf="isMonster" mat-button [routerLink]="['/monsters', routableMonster(monster)]"><mat-icon>info</mat-icon></button>
+        <button mat-button (click)="removeMonsterFromEncounter()"><mat-icon>clear</mat-icon></button>
+    </mat-card-header>
+    <mat-card-content>
+        <span class="card-content">AC: {{monster.AC}}</span>
+        <span class="card-content">HP: {{monster.HP}}</span>
+    </mat-card-content>
+</mat-card>

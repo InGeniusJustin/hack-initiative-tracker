@@ -22,6 +22,8 @@ import { MatToolbarModule,
          MatOptionModule,
          MatSelectModule} from '@angular/material';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EncountersComponent } from './encounters/encounters.component';
@@ -37,6 +39,8 @@ import { MonsterEncounterDialogComponent } from './monster/monster-encounter-dia
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { EncounterRunnerComponent } from './encounters/encounter-runner/encounter-runner.component';
+import { EncounterMonsterComponent } from './encounters/encounter-runner/encounter-monster/encounter-monster.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +56,8 @@ import { EncounterRunnerComponent } from './encounters/encounter-runner/encounte
     EncounterDialogComponent,
     MonsterEncounterDialogComponent,
     EncounterRunnerComponent,
+    EncounterMonsterComponent,
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +82,7 @@ import { EncounterRunnerComponent } from './encounters/encounter-runner/encounte
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
+    DragDropModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],

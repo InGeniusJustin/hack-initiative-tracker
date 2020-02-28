@@ -1,8 +1,2 @@
-<mat-toolbar class="expanded-toolbar">
-  <span>
-    <button mat-button routerLink="/">{{title}}</button>
-    <button mat-button routerLink="/encounters"><mat-icon>list</mat-icon></button>
-    <button mat-button routerLink="/monsters"><mat-icon>pets</mat-icon></button>
-  </span>
-</mat-toolbar>
+<app-toolbar [title]="title"></app-toolbar>
 <router-outlet></router-outlet>
