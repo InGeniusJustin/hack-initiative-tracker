@@ -37,7 +37,7 @@ export class EncounterStore {
     public DeleteEncounter(encounter: IEncounter): boolean {
         const encounters: IEncounter[] = this.retrieveEncounters();
         const deleteIndex = encounters.findIndex(enc => enc.name === encounter.name);
-        if (deleteIndex) {
+        if (deleteIndex !== null && deleteIndex !== undefined && deleteIndex >= 0) {
             encounters.splice(deleteIndex, 1);
             this.saveEncounters(encounters);
             return true;

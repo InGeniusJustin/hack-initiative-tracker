@@ -1,6 +1,8 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>{{monster.Name}}</mat-card-title>
+        <button mat-button [routerLink]="['/monsters', routableMonster(monster)]"><mat-icon>info</mat-icon></button>
+        <button mat-button *ngIf="isMonsterList" (click)="addMonsterToEncounterClick()"><mat-icon>add</mat-icon></button>
     </mat-card-header>
     <mat-card-content>
         <span class="card-content">AC: {{monster.AC}}</span>

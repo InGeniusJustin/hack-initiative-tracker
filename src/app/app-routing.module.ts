@@ -9,7 +9,7 @@ import { EncounterDetailComponent } from './encounters/encounter-detail/encounte
 const routes: Routes = [
   {path: '', component: EncountersComponent},
   {path: 'encounters', component: EncountersComponent},
-  {path: 'encounters/:id', component: EncounterDetailComponent},
+  {path: 'encounters/:name', component: EncounterDetailComponent},
   {path: 'monsters', component: MonsterComponent},
   {path: 'monsters/:name', component: MonsterDetailComponent},
 ];

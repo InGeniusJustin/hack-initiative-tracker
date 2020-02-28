@@ -1,0 +1,10 @@
+.encounter-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.scrollable {
+    overflow-y: auto;
+    max-height:70vh;
+    height: auto;
+}

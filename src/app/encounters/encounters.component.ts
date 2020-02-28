@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EncounterService } from '../services/encounter.service';
 import { IEncounter } from '../store/encounter.store';
 import { FormControl } from '@angular/forms';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { EncounterDialogComponent } from './encounter-dialog/encounter-dialog.component';
 
 @Component({
   selector: 'app-encounters',
@@ -13,15 +15,16 @@ export class EncountersComponent implements OnInit {
   public encounters: IEncounter[];
   public searchControl = new FormControl();
 
-  constructor(private service: EncounterService) { }
+  constructor(
+    private service: EncounterService,
+    private dialog: MatDialog,
+    ) { }
 
   ngOnInit() {
     this.encounters = this.service.Encounters;
     this.searchControl.valueChanges
     .subscribe(val => {
-        if (val.length > 0) {
           this.encounters = this.service.Encounters.filter(encounter => encounter.name.toLowerCase().includes(val.toLowerCase()));
-        }
       });
   }
 
@@ -40,7 +43,20 @@ export class EncountersComponent implements OnInit {
     this.encounters = this.service.Encounters;
   }
 
-  public routableEncounter(encounter: IEncounter) {
-    return encounter.name.toLowerCase().replace(/ /g, '-');
+  public deleteAction = (en) => this.DeleteEncounter(en);
+
+  public addEncounterClick() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(EncounterDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data.name && data.name.length > 0) {
+        this.NewEncounter(data.name);
+      }
+    });
   }
 }

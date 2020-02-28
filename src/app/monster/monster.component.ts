@@ -13,20 +13,13 @@ export class MonsterComponent implements OnInit {
   public monsters: IMonster[];
   public searchControl = new FormControl();
 
-  constructor(protected service: MonsterService) { }
+  constructor(private service: MonsterService) { }
 
   ngOnInit() {
     this.monsters = this.service.Monsters;
     this.searchControl.valueChanges
     .subscribe(val => {
-        if (val.length > 0) {
           this.monsters = this.service.Monsters.filter(monster => monster.Name.toLowerCase().includes(val.toLowerCase()));
-        }
       });
   }
-
-  public routableMonster(monster: IMonster) {
-    return monster.Name.toLowerCase().replace(/ /g, '-');
-  }
-
 }

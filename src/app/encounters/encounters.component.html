@@ -1,10 +1,20 @@
 <mat-card>
-    <input matInput
-    placeholder="Search"
-    [formControl]="searchControl">
+    <mat-card-header>
+        <mat-card-title>
+            Encounters
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field>
+            <input matInput
+            placeholder="Search"
+            [formControl]="searchControl">
+        </mat-form-field>
+        <button mat-button (click)="addEncounterClick()"><mat-icon>add</mat-icon></button>
+    </mat-card-content>
 </mat-card>
 <mat-grid-list cols="1" rowHeight="2:1" class="scrollable">
     <div *ngFor="let encounter of encounters">
-        <app-encounter-detail-small [encounter]="encounter" [routerLink]="['/encounters', routableEncounter(encounter)]"></app-encounter-detail-small>
+        <app-encounter-detail-small [action]="deleteAction" [encounter]="encounter"></app-encounter-detail-small>
     </div>
 </mat-grid-list>

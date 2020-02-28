@@ -15,7 +15,12 @@ import { MatToolbarModule,
          MatDividerModule,
          MatProgressSpinnerModule,
          MatListModule,
-         MatGridListModule} from '@angular/material';
+         MatGridListModule,
+         MatDialogModule,
+         MatFormFieldModule,
+         MatInputModule,
+         MatOptionModule,
+         MatSelectModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +32,8 @@ import { EncounterDetailComponent } from './encounters/encounter-detail/encounte
 import { AbilityModPipe } from './ability-mod.pipe';
 import { CrPipe } from './cr.pipe';
 import { EncounterDetailSmallComponent } from './encounters/encounter-detail-small/encounter-detail-small.component';
+import { EncounterDialogComponent } from './encounters/encounter-dialog/encounter-dialog.component';
+import { MonsterEncounterDialogComponent } from './monster/monster-encounter-dialog/monster-encounter-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +46,8 @@ import { EncounterDetailSmallComponent } from './encounters/encounter-detail-sma
     AbilityModPipe,
     CrPipe,
     EncounterDetailSmallComponent,
+    EncounterDialogComponent,
+    MonsterEncounterDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,8 +67,14 @@ import { EncounterDetailSmallComponent } from './encounters/encounter-detail-sma
     AppRoutingModule,
     MatListModule,
     MatGridListModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EncounterDialogComponent, MonsterEncounterDialogComponent]
 })
 export class AppModule { }
